@@ -12,7 +12,7 @@ router.put('/:id', update);
 router.delete('/:id', remove);
 
 
-async function all (req, res) {
+async function all (req, res, next) {
     try {
         const list = await controller.all();
         response.success(req, res, list, 200);
@@ -22,7 +22,7 @@ async function all (req, res) {
     }
 };
 
-async function one(req, res) {
+async function one(req, res, next) {
     try {
         const user = await controller.one(req.params.id);
         response.success(req, res, user, 200);
@@ -31,7 +31,7 @@ async function one(req, res) {
     }
 };
 
-async function insert(req, res) {
+async function insert(req, res, next) {
     try {
         const user = await controller.insert(req.body);
         response.success(req, res, "Item creado satisfactoriamente", 201);
@@ -40,7 +40,7 @@ async function insert(req, res) {
     }
 };
 
-async function update(req, res) {
+async function update(req, res, next) {
     try {
         const user = await controller.update(req.params.id, req.body);
         response.success(req, res, "Item actualizado satisfactoriamente", 200);
