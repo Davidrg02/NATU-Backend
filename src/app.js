@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.set('port', config.app.port);
 
 // Routes
-app.use('/api/users', usuarios)
+app.use('/api/usuarios', usuarios)
 app.use('/api/vendedores', vendedores)
 
 app.use(errors);
