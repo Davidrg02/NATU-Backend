@@ -2,7 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const config = require('./config');
 
-const users = require('./modules/users/routes'); // Add this line
+const usuarios = require('./modules/usuarios/routes');
+const vendedores = require('./modules/vendedores/routes');
 const errors = require('./network/errors');
 
 const app = express();
@@ -16,7 +17,9 @@ app.use(express.urlencoded({ extended: true }));
 app.set('port', config.app.port);
 
 // Routes
-app.use('/api/users', users)
+app.use('/api/users', usuarios)
+app.use('/api/vendedores', vendedores)
+
 app.use(errors);
 
 module.exports = app;
