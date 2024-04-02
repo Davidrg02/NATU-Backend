@@ -4,6 +4,7 @@ const config = require('./config');
 
 const usuarios = require('./modules/usuarios/routes');
 const vendedores = require('./modules/vendedores/routes');
+const compradores = require('./modules/compradores/routes');
 const errors = require('./network/errors');
 
 const app = express();
@@ -19,6 +20,7 @@ app.set('port', config.app.port);
 // Routes
 app.use('/api/usuarios', usuarios)
 app.use('/api/vendedores', vendedores)
+app.use('/api/compradores', compradores)
 
 app.use(errors);
 
