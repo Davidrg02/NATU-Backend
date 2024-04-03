@@ -77,11 +77,20 @@ function remove(table, id, idField){
     
 }
 
+function filter(table, idCategoria, FilteredField) {
+    return new Promise((resolve, reject) => {
+        connection.query(`SELECT * FROM ${table} WHERE ${FilteredField} = ${idCategoria}`, (error, data) => {
+            return error ? reject(error) : resolve(data);
+        });
+    });
+}
+
 module.exports = {
     all,
     one,
     insert,
     update,
-    remove
+    remove,
+    filter
 }
 

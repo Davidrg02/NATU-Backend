@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.get('/', all);
 router.get('/:id', one);
+router.get('/categoria/:idCategoria', filter);
 router.post('/', insert);
 router.put('/:id', update);
 router.delete('/:id', remove);
@@ -58,6 +59,13 @@ async function remove(req, res, next) {
     }
 };
 
-
+async function filter(req, res, next) {
+    try {
+        const list = await controller.filter(req.params.idCategoria);
+        response.success(req, res, list, 200);
+    } catch (error) {
+        next(error);
+    }
+}
 
 module.exports = router;
