@@ -4,6 +4,7 @@ const config = require('./config');
 
 const usuarios = require('./modules/usuarios/routes');
 const vendedores = require('./modules/vendedores/routes');
+const productos = require('./modules/productos/routes');
 const errors = require('./network/errors');
 
 const app = express();
@@ -17,8 +18,9 @@ app.use(express.urlencoded({ extended: true }));
 app.set('port', config.app.port);
 
 // Routes
-app.use('/api/usuarios', usuarios)
-app.use('/api/vendedores', vendedores)
+app.use('/api/usuarios', usuarios);
+app.use('/api/vendedores', vendedores);
+app.use('/api/productos', productos);
 
 app.use(errors);
 
