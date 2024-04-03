@@ -1,31 +1,23 @@
 const db = require('../../db/mysql');
 const bcrypt = require('bcrypt');
+const auth = require('../../auth');
 
 const table = 'USUARIO';
 const idField = 'ID_Usuario';
 
-function login(email, password) {
-    return new Promise((resolve, reject) => {
-        db.query(`SELECT * FROM ${table} WHERE Correo_usuario = ?`, [email], (err, result) => {
-            if (err) {
-                reject(err);
+async function login(Correo_usuario, password) {
+    const data = await db.query(table, {Correo_usuario: Correo_usuario});
+    console.log("Entrando a login")
+    console.log(data)
+    return bcrypt.compare(password, data.Contraseña_encriptada)
+        .then((match) => {
+            if (!match) {
+                throw new Error('Invalid information');
+                console.log("Error en login")
             }
-            if (result.length === 0) {
-                reject('Invalid information');
-            }
-            const user = result[0];
-            bcrypt.compare(password, user.Contraseña_encriptada, (err, isValid) => {
-                if (err) {
-                    reject(err);
-                }
-                if (isValid) {
-                    resolve('Token');
-                } else {
-                    reject('Invalid information');
-                }
-            });
+
+            return auth.generateToken({...data});
         });
-    });
 }
 
 async function insert(data) {

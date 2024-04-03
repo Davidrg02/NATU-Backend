@@ -71,10 +71,18 @@ function update(table, data, id, idField){
 function remove(table, id, idField){
     return new Promise((resolve, reject) => {
         connection.query(`DELETE FROM ${table} WHERE ${idField} = ${id}`, (error, result) => {
-            return error ? reject(error) : resolve(result);
+            return error ? reject(error) : resolve(result[0]);
         });
     });
     
+}
+
+function query(table, query){
+    return new Promise((resolve, reject) => {
+        connection.query(`SELECT * FROM ${table} WHERE ?`, query, (error, data) => {
+            return error ? reject(error) : resolve(data[0]);
+        });
+    });
 }
 
 module.exports = {
@@ -82,6 +90,7 @@ module.exports = {
     one,
     insert,
     update,
-    remove
+    remove,
+    query
 }
 
