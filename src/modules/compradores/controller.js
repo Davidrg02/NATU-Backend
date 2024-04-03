@@ -17,7 +17,7 @@ function one(id) {
 async function insert(data) {
 
     const id = uuid.v4();
-    const numericID = parseInt(id.split('-')[0], 16)/2;
+    const numericID = parseInt(parseInt(id.split('-')[0], 16)/2);
 
     await auth.insert({
         ID_Usuario: numericID,

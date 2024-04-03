@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const config = require('./config');
+const cors = require('cors');
 
 const usuarios = require('./modules/usuarios/routes');
 const vendedores = require('./modules/vendedores/routes');
@@ -9,6 +10,9 @@ const auth = require('./modules/auth/routes');
 const errors = require('./network/errors');
 
 const app = express();
+
+// Cors
+app.use(cors());
 
 // Middlewares
 app.use(morgan('dev'));
