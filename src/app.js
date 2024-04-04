@@ -7,6 +7,7 @@ const usuarios = require('./modules/usuarios/routes');
 const vendedores = require('./modules/vendedores/routes');
 const compradores = require('./modules/compradores/routes');
 const auth = require('./modules/auth/routes');
+const productos = require('./modules/productos/routes');
 const errors = require('./network/errors');
 
 const app = express();
@@ -23,8 +24,9 @@ app.use(express.urlencoded({ extended: true }));
 app.set('port', config.app.port);
 
 // Routes
-app.use('/api/usuarios', usuarios)
-app.use('/api/vendedores', vendedores)
+app.use('/api/usuarios', usuarios);
+app.use('/api/vendedores', vendedores);
+app.use('/api/productos', productos);
 app.use('/api/compradores', compradores)
 app.use('/api/auth', auth);
 
