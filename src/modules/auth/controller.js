@@ -7,16 +7,23 @@ const idField = 'ID_Usuario';
 
 async function login(Correo_usuario, password) {
     const data = await db.query(table, {Correo_usuario: Correo_usuario});
-    console.log("Entrando a login")
-    console.log(data)
+    const userData = await db.one("COMPRADOR", data.ID_Usuario, "ID_Usuario");
+    
     return bcrypt.compare(password, data.Contraseña_encriptada)
         .then((match) => {
             if (!match) {
                 throw new Error('Invalid information');
-                console.log("Error en login")
+            }
+            //se devuelve el token y los datos del usuario (nombre, correo, etc.)
+
+            
+
+            const body = {
+                token : auth.generateToken({...data}),
+                userData : userData
             }
 
-            return auth.generateToken({...data});
+            return body;
         });
 }
 
