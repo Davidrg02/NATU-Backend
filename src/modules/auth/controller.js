@@ -8,24 +8,36 @@ const idField = 'ID_Usuario';
 async function login(Correo_usuario, password) {
     const data = await db.query(table, {Correo_usuario: Correo_usuario});
     const userData = await db.one("COMPRADOR", data.ID_Usuario, "ID_Usuario");
-    
+
+    let rol;
+    if (userData) {
+        rol = "Comprador";
+    } else {
+        // Si el usuario no está en la tabla COMPRADOR, buscamos en la tabla TIENDA
+        const storeData = await db.one("TIENDA", data.ID_Usuario, "ID_Usuario");
+        if (storeData) {
+            rol = "Vendedor";
+        } else {
+            throw new Error('Usuario no encontrado');
+        }
+    }
+
     return bcrypt.compare(password, data.Contraseña_encriptada)
         .then((match) => {
             if (!match) {
-                throw new Error('Invalid information');
+                throw new Error('Información inválida');
             }
-            //se devuelve el token y los datos del usuario (nombre, correo, etc.)
-
             
-
             const body = {
                 token : auth.generateToken({...data}),
-                userData : userData
+                userData : userData,
+                rol: rol
             }
 
             return body;
         });
 }
+
 
 async function insert(data) {
 

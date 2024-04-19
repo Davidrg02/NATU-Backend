@@ -93,6 +93,16 @@ function filter(table, idCategoria, FilteredField) {
     });
 }
 
+function customQuery(query){
+    return new Promise((resolve, reject) => {
+        connection.query(query, (error, data) => {
+            return error ? reject(error) : resolve(data);
+        });
+    }
+    );
+}
+
+
 module.exports = {
     all,
     one,
@@ -100,6 +110,7 @@ module.exports = {
     update,
     remove,
     query,
-    filter
+    filter,
+    customQuery
 }
 
