@@ -7,20 +7,20 @@ const idField = 'ID_Usuario';
 
 async function login(Correo_usuario, password) {
     const data = await db.query(table, {Correo_usuario: Correo_usuario});
-    const userData = await db.one("COMPRADOR", data.ID_Usuario, "ID_Usuario");
+    console.log(data);
+    let userData;
 
     let rol;
-    if (userData) {
+    if (data.ROL_USUARIO_ID_Rol === 3) {
+        userData = await db.one("COMPRADOR", data.ID_Usuario, "USUARIO_ID_Usuario");
         rol = "Comprador";
+    } else if (data.ROL_USUARIO_ID_Rol === 2){
+        userData = await db.one("TIENDA", data.ID_Usuario, "USUARIO_ID_Usuario");
+        rol = "Vendedor";
     } else {
-        // Si el usuario no está en la tabla COMPRADOR, buscamos en la tabla TIENDA
-        const storeData = await db.one("TIENDA", data.ID_Usuario, "ID_Usuario");
-        if (storeData) {
-            rol = "Vendedor";
-        } else {
-            throw new Error('Usuario no encontrado');
-        }
+        throw new Error('Usuario no encontrado');
     }
+    
 
     return bcrypt.compare(password, data.Contraseña_encriptada)
         .then((match) => {
@@ -43,6 +43,7 @@ async function insert(data) {
 
     const authData = {
         ID_Usuario: data.ID_Usuario,
+        Rol_USUARIO_ID_Rol: data.Rol_USUARIO_ID_Rol
     }
 
     if(data.Correo_usuario) {

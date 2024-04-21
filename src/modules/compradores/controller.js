@@ -4,6 +4,7 @@ const uuid = require('uuid');
 const table = 'COMPRADOR';
 const idField = 'ID_Comprador';
 const auth = require('../auth/controller');
+const Direccion = require('../direcciones/controller');
 
 
 function all() {
@@ -22,15 +23,27 @@ async function insert(data) {
     await auth.insert({
         ID_Usuario: numericID,
         Correo_usuario: data.Correo_usuario,
-        Contraseña_encriptada: data.Contraseña_encriptada
+        Contraseña_encriptada: data.Contraseña_encriptada,
+        Rol_USUARIO_ID_Rol: 3
     });
+
+    await Direccion.insert({
+        ID_Direccion: numericID,
+        Direccion: data.Direccion,
+        Descripcion_adicional: data.Descripcion_adicional,
+        MUNICIPIO_ID_Municipio: data.MUNICIPIO_ID_Municipio
+    });
+    
 
     const comprador = {
         ID_Comprador: numericID,
+        Documento_comprador: data.Documento_comprador,
         Nombres_comprador: data.Nombres_comprador,
-        Dirección_comprador: data.Dirección_comprador,
-        Teléfono_comprador: data.Teléfono_comprador,
-        ID_Usuario: numericID
+        Apellidos_comprador: data.Apellidos_comprador,
+        Telefono_comprador: data.Telefono_comprador,
+        Fecha_nacimiento_comprador: data.Fecha_nacimiento_comprador,
+        USUARIO_ID_Usuario: numericID,
+        DIRECCION_ID_Direccion: numericID
     }
 
     const response = await db.insert(table, comprador);

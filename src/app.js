@@ -8,6 +8,8 @@ const vendedores = require('./modules/vendedores/routes');
 const compradores = require('./modules/compradores/routes');
 const auth = require('./modules/auth/routes');
 const productos = require('./modules/productos/routes');
+const departamentos = require('./modules/departamentos/routes');
+const municipios = require('./modules/municipios/routes');
 const errors = require('./network/errors');
 
 const app = express();
@@ -27,7 +29,9 @@ app.set('port', config.app.port);
 app.use('/api/usuarios', usuarios);
 app.use('/api/vendedores', vendedores);
 app.use('/api/productos', productos);
-app.use('/api/compradores', compradores)
+app.use('/api/compradores', compradores);
+app.use('/api/departamentos', departamentos);
+app.use('/api/municipios', municipios);
 app.use('/api/auth', auth);
 
 app.use(errors);

@@ -37,7 +37,8 @@ connectionDB();
 
 function all(table){
     return new Promise((resolve, reject) => {
-        connection.query(`SELECT * FROM ${table}`, (error, data) => {
+        const query = 'SELECT * FROM ??';
+        connection.query(query, [table], (error, data) => {
             return error ? reject(error) : resolve(data);
         });
     });
@@ -45,7 +46,8 @@ function all(table){
 
 function one(table, id, idField) {
     return new Promise((resolve, reject) => {
-        connection.query(`SELECT * FROM ${table} WHERE ${idField} = ${id}`, (error, data) => {
+        const query = 'SELECT * FROM ?? WHERE ?? = ?';
+        connection.query(query, [table, idField, id], (error, data) => {
             return error ? reject(error) : resolve(data);
         });
     });
@@ -54,7 +56,8 @@ function one(table, id, idField) {
 
 function insert(table, data){
     return new Promise((resolve, reject) => {
-        connection.query(`INSERT INTO ${table} SET ?`, data, (error, result) => {
+        const query = 'INSERT INTO ?? SET ?';
+        connection.query(query, [table, data], (error, result) => {
             return error ? reject(error) : resolve(result);
         });
     });
@@ -62,7 +65,8 @@ function insert(table, data){
 
 function update(table, data, id, idField){
     return new Promise((resolve, reject) => {
-        connection.query(`UPDATE ${table} SET ? WHERE ${idField} = ${id}`, data, (error, result) => {
+        const query = 'UPDATE ?? SET ? WHERE ?? = ?';
+        connection.query(query, [table, data, idField, id], (error, result) => {
             return error ? reject(error) : resolve(result);
         });
     });
@@ -70,24 +74,26 @@ function update(table, data, id, idField){
 
 function remove(table, id, idField){
     return new Promise((resolve, reject) => {
-        connection.query(`DELETE FROM ${table} WHERE ${idField} = ${id}`, (error, result) => {
+        const query = 'DELETE FROM ?? WHERE ?? = ?';
+        connection.query(query, [table, idField, id], (error, result) => {
             return error ? reject(error) : resolve(result[0]);
         });
-    });
-    
+    });   
 }
 
 function query(table, query){
     return new Promise((resolve, reject) => {
-        connection.query(`SELECT * FROM ${table} WHERE ?`, query, (error, data) => {
+        const sql = 'SELECT * FROM ?? WHERE ?';
+        connection.query(sql, [table, query], (error, data) => {
             return error ? reject(error) : resolve(data[0]);
         });
     });
 }
 
-function filter(table, idCategoria, FilteredField) {
+function filter(table, filterValue , FilteredField) {
     return new Promise((resolve, reject) => {
-        connection.query(`SELECT * FROM ${table} WHERE ${FilteredField} = ${idCategoria}`, (error, data) => {
+        const query = 'SELECT * FROM ?? WHERE ?? = ?';
+        connection.query(query, [table, FilteredField, filterValue], (error, data) => {
             return error ? reject(error) : resolve(data);
         });
     });
@@ -98,8 +104,7 @@ function customQuery(query){
         connection.query(query, (error, data) => {
             return error ? reject(error) : resolve(data);
         });
-    }
-    );
+    });
 }
 
 

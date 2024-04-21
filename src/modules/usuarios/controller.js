@@ -1,7 +1,7 @@
 const db = require('../../db/mysql');
 
 const table = 'USUARIO';
-const idField = 'ID_USUARIO';
+const idField = 'ID_Usuario';
 
 function all() {
     return db.all(table);

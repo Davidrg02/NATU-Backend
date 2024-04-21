@@ -1,7 +1,8 @@
 const db = require('../../db/mysql');
 
-const table = 'VENDEDOR';
-const idField = 'ID_Vendedor';
+const table = 'DIRECCION';
+const idField = 'ID_Direccion';
+const FilteredField = 'ID_Comprador';
 
 function all() {
     return db.all(table);
@@ -23,12 +24,15 @@ function remove(id) {
     return db.remove(table, id, idField);
 }
 
+function filter(filterValue) {
+    return db.filter(table, filterValue, FilteredField);
+}
 
 module.exports = {
     all,
     one,
     insert,
     update,
-    remove
+    remove,
+    filter
 }
-
