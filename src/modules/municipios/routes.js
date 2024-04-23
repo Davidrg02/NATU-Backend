@@ -10,6 +10,7 @@ router.get('/:id', one);
 router.post('/', insert);
 router.put('/:id', update);
 router.delete('/:id', remove);
+router.get('/filter/:id', filter); //filter by ID_Departamento
 
 
 async function all (req, res, next) {
@@ -57,6 +58,15 @@ async function remove(req, res, next) {
         next(error);
     }
 };
+
+async function filter(req, res, next) {
+    try {
+        const direccion = await controller.filter(req.params.id);
+        response.success(req, res, direccion, 200);
+    } catch (error) {
+        next(error);
+    }
+}   
 
 
 

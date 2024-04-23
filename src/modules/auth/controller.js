@@ -30,7 +30,7 @@ async function login(Correo_usuario, password) {
             
             const body = {
                 token : auth.generateToken({...data}),
-                userData : userData,
+                user : userData,
                 rol: rol
             }
 
