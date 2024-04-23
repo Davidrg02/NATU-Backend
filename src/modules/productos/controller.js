@@ -28,11 +28,16 @@ function filter(idCategoria) {
     return db.filter(table, idCategoria, FilteredField);
 }
 
+function filterByVendor(idVendedor) {
+    return db.filter(table, idVendedor, 'VENDEDOR_ID_Vendedor');
+}
+
 module.exports = {
     all,
     one,
     insert,
     update,
     remove,
-    filter
+    filter,
+    filterByVendor
 }

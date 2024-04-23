@@ -8,6 +8,7 @@ const router = express.Router();
 router.get('/', all); //Listar todos los productos
 router.get('/:id', one); //Listar un producto por su id
 router.get('/categoria/:idCategoria', filter); //Categoria
+router.get('/vendedor/:idVendedor', filterByVendor); //Vendedor
 router.post('/', insert);
 router.put('/:id', update);
 router.delete('/:id', remove);
@@ -62,6 +63,15 @@ async function remove(req, res, next) {
 async function filter(req, res, next) {
     try {
         const list = await controller.filter(req.params.idCategoria);
+        response.success(req, res, list, 200);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function filterByVendor(req, res, next) {
+    try {
+        const list = await controller.filterByVendor(req.params.idVendedor);
         response.success(req, res, list, 200);
     } catch (error) {
         next(error);
