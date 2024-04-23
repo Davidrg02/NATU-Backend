@@ -99,6 +99,7 @@ function filter(table, filterValue , FilteredField) {
     });
 }
 
+
 function customQuery(query){
     return new Promise((resolve, reject) => {
         connection.query(query, (error, data) => {
