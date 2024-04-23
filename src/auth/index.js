@@ -17,6 +17,19 @@ const checkToken = {
     }
 }
 
+function getToken(authorization) {
+    if(!authorization){
+        throw new Error('No token');
+    }
+
+    if(authorization.indexOf(`Bearer`) === -1){
+        throw new Error(`Invalid Format`);
+    }
+
+    let token = authorization.replace(`Bearer`, '');
+    return token;
+}
+
 function decodeHeaders(req) {
     const authorization = req.headers.authorization || '';
     const token = getToken(authorization);
@@ -26,6 +39,8 @@ function decodeHeaders(req) {
 
     return decoded;
 }
+
+
 
 module.exports = {
     generateToken,
