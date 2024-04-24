@@ -45,9 +45,11 @@ async function insert(data) {
     return response;
 }
 
-function update(id, data) {
-    return db.update(table, data, id, idField);
+
+async function update(id, data) {
+    ////////////////////////////const numericID = parseInt(parseInt(id.split('-')[0], 16)/2);
 }
+
 
 function remove(id) {
     return db.remove(table, id, idField);
