@@ -47,7 +47,17 @@ async function insert(data) {
 
 
 async function update(id, data) {
-    ////////////////////////////const numericID = parseInt(parseInt(id.split('-')[0], 16)/2);
+    await Direccion.update(id,{
+        Direccion: data.Direccion,
+        Descripcion_adicional: data.Descripcion_adicional,
+        MUNICIPIO_ID_Municipio: data.MUNICIPIO_ID_Municipio
+    });
+
+    const vendedor = {
+        Nombre_vendedor: data.Nombre_vendedor
+    };
+
+    const response = await db.update(table, vendedor, id, idField);
 }
 
 
