@@ -13,11 +13,9 @@ function verifyToken(token) {
 
 const checkToken = {
     confirmToken: function (req) {
-        const decoded = decodeHeaders(req.params.headers);
+        const decoded = decodeHeaders(req);
 
-        if (decoded.id !== id){
-            throw error('No tienes acceso a este recurso', 401);
-        }
+        
     }
 }
 
@@ -30,7 +28,7 @@ function getToken(authorization) {
         throw error(`Invalid Format`, 401);
     }
 
-    let token = authorization.replace(`Bearer`, '');
+    let token = authorization.replace(`Bearer `, '');
     return token;
 }
 

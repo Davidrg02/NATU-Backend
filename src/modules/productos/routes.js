@@ -2,6 +2,7 @@ const express = require('express');
 
 const response = require('../../network/response');
 const controller = require('./controller');
+const security = require('./security');
 
 const router = express.Router();
 
@@ -9,8 +10,9 @@ router.get('/', all); //Listar todos los productos
 router.get('/:id', one); //Listar un producto por su id
 router.get('/categoria/:idCategoria', filter); //Categoria
 router.post('/', insert);
-router.put('/:id', update);
-router.delete('/:id', remove);
+router.put('/:id',security(), update);
+/////////router.put('/:id', hide);
+router.delete('/:id',security(), remove);
 
 
 async function all (req, res, next) {
