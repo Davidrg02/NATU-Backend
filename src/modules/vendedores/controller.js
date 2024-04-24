@@ -1,11 +1,8 @@
 const db = require('../../db/mysql');
 const uuid = require('uuid');
-const uuid = require('uuid');
 
 const table = 'VENDEDOR';
 const idField = 'ID_Vendedor';
-const auth = require('../auth/controller');
-const Direccion = require('../direcciones/controller');
 const auth = require('../auth/controller');
 const Direccion = require('../direcciones/controller');
 
