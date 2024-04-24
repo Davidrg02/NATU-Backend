@@ -17,6 +17,9 @@ async function login(Correo_usuario, password) {
     } else if (data.ROL_USUARIO_ID_Rol === 2){
         userData = await db.one("VENDEDOR", data.ID_Usuario, "USUARIO_ID_Usuario");
         rol = "Vendedor";
+    } else if (data.ROL_USUARIO_ID_Rol === 1){
+        userData = await db.one("ADMINISTRADOR", data.ID_Usuario, "USUARIO_ID_Usuario");
+        rol = "Administrador";
     } else {
         throw new Error('Usuario no encontrado');
     }
