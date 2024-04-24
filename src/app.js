@@ -10,6 +10,7 @@ const auth = require('./modules/auth/routes');
 const productos = require('./modules/productos/routes');
 const departamentos = require('./modules/departamentos/routes');
 const municipios = require('./modules/municipios/routes');
+const direcciones = require('./modules/direcciones/routes');
 const errors = require('./network/errors');
 
 const app = express();
@@ -32,6 +33,7 @@ app.use('/api/productos', productos);
 app.use('/api/compradores', compradores);
 app.use('/api/departamentos', departamentos);
 app.use('/api/municipios', municipios);
+app.use('/api/direcciones', direcciones);
 app.use('/api/auth', auth);
 
 app.use(errors);

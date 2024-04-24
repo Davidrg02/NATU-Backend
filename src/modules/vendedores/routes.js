@@ -2,6 +2,7 @@ const express = require('express');
 
 const response = require('../../network/response');
 const controller = require('./controller');
+const security = require('./security');
 
 
 const router = express.Router();
@@ -9,8 +10,8 @@ const router = express.Router();
 router.get('/', all);
 router.get('/:id', one);
 router.post('/', insert);
-router.put('/:id', update);
-router.delete('/:id', remove);
+router.put('/:id', security(), update);
+router.delete('/:id', security(), remove);
 
 
 async function all (req, res, next) {

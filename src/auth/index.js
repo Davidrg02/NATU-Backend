@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-config = require('../config');
-
+const config = require('../config');
+const error = require('../middleware/errors');
 const secret = config.jwt.secret;
 
 function generateToken(data) {
@@ -14,16 +14,20 @@ function verifyToken(token) {
 const checkToken = {
     confirmToken: function (req) {
         const decoded = decodeHeaders(req.params.headers);
+
+        if (decoded.id !== id){
+            throw error('No tienes acceso a este recurso', 401);
+        }
     }
 }
 
 function getToken(authorization) {
     if(!authorization){
-        throw new Error('No token');
+        throw error('No token', 401);
     }
 
     if(authorization.indexOf(`Bearer`) === -1){
-        throw new Error(`Invalid Format`);
+        throw error(`Invalid Format`, 401);
     }
 
     let token = authorization.replace(`Bearer`, '');
@@ -44,5 +48,5 @@ function decodeHeaders(req) {
 
 module.exports = {
     generateToken,
-    verifyToken,
+    checkToken,
 }
