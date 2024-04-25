@@ -3,7 +3,6 @@ const express = require('express');
 const response = require('../../network/response');
 const controller = require('./controller');
 const security = require('./security');
-const hide = require('./hide');
 const router = express.Router();
 
 router.get('/', all); //Listar todos los productos
@@ -11,7 +10,7 @@ router.get('/:id', one); //Listar un producto por su id
 router.get('/categoria/:idCategoria', filter); //Categoria
 router.post('/', insert);
 router.put('/:id',security(), update);
-//router.put('/ocultar/:id', hide());
+router.put('/ocultar/:id',security(), hide);
 router.delete('/:id',security(), remove);
 
 

@@ -108,6 +108,14 @@ function customQuery(query){
     });
 }
 
+function hide(table, id, idField){
+    return new Promise((resolve, reject) => {
+        const query = 'UPDATE ?? SET Activo = (1 - Activo) WHERE ?? = ?';
+        connection.query(query, [table, idField, id], (error, result) => {
+            return error ? reject(error) : resolve(result);
+        });
+    });
+}
 
 module.exports = {
     all,
@@ -117,6 +125,7 @@ module.exports = {
     remove,
     query,
     filter,
-    customQuery
+    customQuery,
+    hide
 }
 
