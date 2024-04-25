@@ -28,11 +28,28 @@ function filter(idCategoria) {
     return db.filter(table, idCategoria, FilteredField);
 }
 
+
+//agregar a db/mysql
+async function hide(id) {
+    const producto = {
+        Activo: data.Activo
+    };
+
+    if (producto.Activo == 1) {
+        producto.Activo = 1;
+    } else {
+        producto.Activo = 0;
+    }
+
+    const response = await db.update(table, producto, id, idField);
+}
+
 module.exports = {
     all,
     one,
     insert,
     update,
     remove,
-    filter
+    filter,
+    hide
 }
