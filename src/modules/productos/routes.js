@@ -12,6 +12,7 @@ router.post('/', insert);
 router.put('/:id',security(), update);
 router.put('/ocultar/:id',security(), hide);
 router.delete('/:id',security(), remove);
+router.get('/vendedor/:idVendedor',security(), getProductsBySeller);
 
 
 async function all (req, res, next) {
@@ -73,6 +74,15 @@ async function hide(req, res, next) {
     try {
         const product = await controller.hide(req.params.id);
         response.success(req, res, "Item actualizado satisfactoriamente", 200);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function getProductsBySeller(req, res, next) {
+    try {
+        const list = await controller.getProductsBySeller(req.params.idVendedor);
+        response.success(req, res, list, 200);
     } catch (error) {
         next(error);
     }

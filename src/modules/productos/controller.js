@@ -32,6 +32,10 @@ function hide(id) {
     return db.hide(table, id, idField);
 }
 
+function getProductsBySeller(idVendedor) {
+    return db.filter(table, idVendedor, 'VENDEDOR_ID_Vendedor');
+}
+
 module.exports = {
     all,
     one,
@@ -39,5 +43,6 @@ module.exports = {
     update,
     remove,
     filter,
-    hide
+    hide,
+    getProductsBySeller
 }
