@@ -3,6 +3,7 @@ const uuid = require('uuid');
 
 const table = 'COMPRADOR';
 const idField = 'ID_Comprador';
+const docField = 'Documento_comprador';
 const auth = require('../auth/controller');
 const Direccion = require('../direcciones/controller');
 
@@ -13,6 +14,10 @@ function all() {
 
 function one(id) { 
     return db.one(table, id, idField);
+}
+
+function oneByDoc(id) { 
+    return db.one(table, id, docField);
 }
 
 async function insert(data) {
@@ -63,6 +68,7 @@ function remove(id) {
 module.exports = {
     all,
     one,
+    oneByDoc,
     insert,
     update,
     remove
