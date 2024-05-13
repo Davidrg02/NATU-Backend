@@ -23,7 +23,7 @@ async function insert(data) {
         ID_Usuario: numericID,
         Correo_usuario: data.Correo_usuario,
         Contraseña_encriptada: data.Contraseña_encriptada,
-        Rol_USUARIO_ID_Rol: 2
+        Rol_USUARIO_ID_Rol: 3
     });
 
     await Direccion.insert({
@@ -32,10 +32,16 @@ async function insert(data) {
         Descripcion_adicional: data.Descripcion_adicional,
         MUNICIPIO_ID_Municipio: data.MUNICIPIO_ID_Municipio
     });
+    
 
     const vendedor = {
         ID_Vendedor: numericID,
-        Nombre_vendedor: data.Nombre_vendedor,
+        Documento_vendedor: data.Documento_vendedor,
+        Nombre_vendedor: data.Nombres_vendedor,
+        Apellidos_vendedor: data.Apellidos_vendedor,
+        Telefono_vendedor: data.Telefono_vendedor,
+        FechaNacimiento_vendedor: data.FechaNacimiento_vendedor,
+        Nombre_tienda: data.Nombre_tienda,
         USUARIO_ID_Usuario: numericID,
         DIRECCION_ID_Direccion: numericID
     }

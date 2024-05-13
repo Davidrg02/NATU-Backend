@@ -34,6 +34,10 @@ async function insert(data) {
         MUNICIPIO_ID_Municipio: data.MUNICIPIO_ID_Municipio
     });
     
+    await Carrito.insert({
+        ID_Carrito: numericID,
+        USUARIO_ID_Usuario: numericID
+    });
 
     const comprador = {
         ID_Comprador: numericID,
