@@ -5,6 +5,7 @@ const table = 'COMPRADOR';
 const idField = 'ID_Comprador';
 const auth = require('../auth/controller');
 const Direccion = require('../direcciones/controller');
+const Carrito = require('../carrito/controller');
 
 
 function all() {
