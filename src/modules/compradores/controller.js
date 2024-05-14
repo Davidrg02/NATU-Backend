@@ -37,7 +37,7 @@ async function insert(data) {
     
     await Carrito.insert({
         ID_Carrito: numericID,
-        USUARIO_ID_Usuario: numericID
+        COMPRADOR_ID_Comprador: numericID
     });
 
     const comprador = {
