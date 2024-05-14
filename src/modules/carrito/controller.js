@@ -34,8 +34,14 @@ function deleteProducto(id) {
 }
 
 function allProductosByCarrito(id) {
-    return db.filter(tableProductos, id, idField);
+    return db.customQuery(`
+        SELECT p.*, tp.Cantidad 
+        FROM PRODUCTO p 
+        INNER JOIN ${tableProductos} tp ON p.ID_PRODUCTO = tp.PRODUCTO_ID_Producto 
+        WHERE tp.CARRITO_ID_Carrito = ${id}
+    `);
 }
+
 
 module.exports = {
     all,
