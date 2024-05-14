@@ -35,10 +35,6 @@ async function insert(data) {
         MUNICIPIO_ID_Municipio: data.MUNICIPIO_ID_Municipio
     });
     
-    await Carrito.insert({
-        ID_Carrito: numericID,
-        COMPRADOR_ID_Comprador: numericID
-    });
 
     const comprador = {
         ID_Comprador: numericID,
@@ -52,6 +48,12 @@ async function insert(data) {
     }
 
     const response = await db.insert(table, comprador);
+
+    await Carrito.insert({
+        ID_Carrito: numericID,
+        COMPRADOR_ID_Comprador: numericID
+    });
+
 
     return response;
 }
