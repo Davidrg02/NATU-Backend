@@ -26,7 +26,17 @@ function remove(id) {
 }
 
 function insertProducto(data) {
-    return db.insert(tableProductos, data);
+    //comprobar si ya existe el producto en el carrito, si es asi sumar las cantidades sin crear un nuevo registro
+    let query = `SELECT * FROM ${tableProductos} WHERE CARRITO_ID_Carrito = ${data.CARRITO_ID_Carrito} AND PRODUCTO_ID_Producto = ${data.PRODUCTO_ID_Producto}`;
+    return db.customQuery(query).then
+    (result => {
+        if(result.length > 0){
+            let cantidad = result[0].Cantidad + data.Cantidad;
+            return db.customQuery(`UPDATE ${tableProductos} SET Cantidad = ${cantidad} WHERE CARRITO_ID_Carrito = ${data.CARRITO_ID_Carrito} AND PRODUCTO_ID_Producto = ${data.PRODUCTO_ID_Producto}`);
+        }else{
+            return db.insert(tableProductos, data);
+        }
+    });
 }
 
 function deleteProducto(idCarrito, idProducto) {
