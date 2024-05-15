@@ -29,8 +29,8 @@ function insertProducto(data) {
     return db.insert(tableProductos, data);
 }
 
-function deleteProducto(id) {
-    return db.remove(tableProductos, id, idFieldProductos);
+function deleteProducto(idCarrito, idProducto) {
+    return db.customQuery(`DELETE FROM ${tableProductos} WHERE CARRITO_ID_Carrito = ${idCarrito} AND PRODUCTO_ID_Producto = ${idProducto}`);
 }
 
 function allProductosByCarrito(id) {

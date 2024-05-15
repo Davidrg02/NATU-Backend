@@ -10,7 +10,7 @@ router.get('/:id', one); //Listar un producto por su id
 router.post('/', insert);
 router.delete('/:id', security(), remove);
 router.post('/producto', security() ,insertProducto);
-router.delete('/producto/:id', security(), deleteProducto);
+router.delete('/producto/:idCarrito/:idProducto', security(), deleteProducto)
 router.get('/productos/:id', security(), allProductosByCarrito);
 
 async function all (req, res, next) {
@@ -63,7 +63,7 @@ async function insertProducto(req, res, next) {
 
 async function deleteProducto(req, res, next) {
     try {
-        const carrito = await controller.deleteProducto(req.params.id);
+        const carrito = await controller.deleteProducto(req.params.idCarrito, req.params.idProducto);
         response.success(req, res, "Producto eliminado del carrito satisfactoriamente", 200);
     }
     catch (error) {
