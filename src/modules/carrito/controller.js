@@ -39,6 +39,10 @@ function insertProducto(data) {
     });
 }
 
+function updateCantidadProducto(data) {
+    return db.customQuery(`UPDATE ${tableProductos} SET Cantidad = ${data.Cantidad} WHERE CARRITO_ID_Carrito = ${data.CARRITO_ID_Carrito} AND PRODUCTO_ID_Producto = ${data.PRODUCTO_ID_Producto}`);
+}
+
 function deleteProducto(idCarrito, idProducto) {
     return db.customQuery(`DELETE FROM ${tableProductos} WHERE CARRITO_ID_Carrito = ${idCarrito} AND PRODUCTO_ID_Producto = ${idProducto}`);
 }
@@ -60,6 +64,7 @@ module.exports = {
     update,
     remove,
     insertProducto,
+    updateCantidadProducto,
     deleteProducto,
     allProductosByCarrito
 }

@@ -10,6 +10,7 @@ router.get('/:id', one); //Listar un producto por su id
 router.post('/', insert);
 router.delete('/:id', security(), remove);
 router.post('/producto', security() ,insertProducto);
+router.put('/producto', security(), updateCantidadProducto);
 router.delete('/producto/:idCarrito/:idProducto', security(), deleteProducto)
 router.get('/productos/:id', security(), allProductosByCarrito);
 
@@ -55,6 +56,16 @@ async function insertProducto(req, res, next) {
     try {
         const carrito = await controller.insertProducto(req.body);
         response.success(req, res, "Producto agregado al carrito satisfactoriamente", 201);
+    }
+    catch (error) {
+        next(error);
+    }
+}
+
+async function updateCantidadProducto(req, res, next) {
+    try {
+        const carrito = await controller.updateCantidadProducto(req.body);
+        response.success(req, res, "Cantidad actualizada satisfactoriamente", 200);
     }
     catch (error) {
         next(error);
