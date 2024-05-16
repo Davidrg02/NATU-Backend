@@ -41,7 +41,7 @@ async function insert(data) {
     const vendedor = {
         ID_Vendedor: numericID,
         Documento_vendedor: data.Documento_vendedor,
-        Nombres_vendedor: data.Nombres_vendedor,
+        Nombre_vendedor: data.Nombres_vendedor,
         Apellidos_vendedor: data.Apellidos_vendedor,
         Nombre_tienda: data.Nombre_tienda,
         Telefono_vendedor: data.Telefono_vendedor,
@@ -65,7 +65,7 @@ async function update(id, data) {
 
     const vendedor = {
         Documento_vendedor: data.Documento_vendedor,
-        Nombres_vendedor: data.Nombres_vendedor,
+        Nombre_vendedor: data.Nombres_vendedor,
         Apellidos_vendedor: data.Apellidos_vendedor,
         Nombre_tienda: data.Nombre_tienda,
         Telefono_vendedor: data.Telefono_vendedor,
