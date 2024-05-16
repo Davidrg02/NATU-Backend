@@ -2,6 +2,7 @@ const db = require('../../db/mysql');
 
 const table = 'PRODUCTO';
 const idField = 'ID_PRODUCTO';
+const nameField = 'Nombre_Producto';
 const FilteredField = 'ID_Categoria';
 
 function all() {
@@ -32,6 +33,10 @@ function hide(id) {
     return db.hide(table, id, idField);
 }
 
+function search(name) {
+    return db.search(table, nameField, name);
+}
+
 module.exports = {
     all,
     one,
@@ -39,5 +44,6 @@ module.exports = {
     update,
     remove,
     filter,
-    hide
+    hide,
+    search
 }
