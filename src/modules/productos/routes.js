@@ -8,6 +8,7 @@ const router = express.Router();
 router.get('/', all); //Listar todos los productos
 router.get('/:id', one); //Listar un producto por su id
 router.get('/categoria/:idCategoria', filter); //Categoria
+router.get('/buscar/:name', search); //Buscar producto por nombre
 router.post('/', insert);
 router.put('/:id',security(), update);
 router.put('/ocultar/:id',security(), hide);
@@ -83,6 +84,15 @@ async function getProductsBySeller(req, res, next) {
     try {
         const list = await controller.getProductsBySeller(req.params.idVendedor);
         response.success(req, res, list, 200);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function search(req, res, next) {
+    try {
+        const product = await controller.search(req.params.name);
+        response.success(req, res, product, 200);
     } catch (error) {
         next(error);
     }

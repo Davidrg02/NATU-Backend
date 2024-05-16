@@ -8,7 +8,8 @@ const security = require('./security');
 const router = express.Router();
 
 router.get('/', all);
-router.get('/:id', one);
+router.get('/:id', security(), one);
+router.get('/doc/:doc', security(), oneByDoc);
 router.post('/', insert);
 router.put('/:id', security(), update);
 router.delete('/:id', security(), remove);
@@ -32,6 +33,15 @@ async function one(req, res, next) {
         next(error);
     }
 };
+
+async function oneByDoc(req, res, next) {   
+    try {
+        const user = await controller.oneByDoc(req.params.doc);
+        response.success(req, res, user, 200);
+    } catch (error) {
+        next(error);
+    }
+}
 
 async function insert(req, res, next) {
     try {

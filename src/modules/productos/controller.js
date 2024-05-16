@@ -2,6 +2,7 @@ const db = require('../../db/mysql');
 
 const table = 'PRODUCTO';
 const idField = 'ID_PRODUCTO';
+const nameField = 'Nombre_Producto';
 const FilteredField = 'CATEGORIA_ID_Categoria';
 
 function all() {
@@ -36,6 +37,10 @@ function getProductsBySeller(idVendedor) {
     return db.filter(table, idVendedor, 'VENDEDOR_ID_Vendedor');
 }
 
+function search(name) {
+    return db.search(table, nameField, name);
+}
+
 module.exports = {
     all,
     one,
@@ -44,5 +49,6 @@ module.exports = {
     remove,
     filter,
     hide,
-    getProductsBySeller
+    getProductsBySeller,
+    search
 }

@@ -2,14 +2,15 @@ const express = require('express');
 
 const response = require('../../network/response');
 const controller = require('./controller');
-
+const security = require('./security');
 const router = express.Router();
 
 router.get('/', all);
-router.get('/:id', one);
+router.get('/:id', security(), one);
+router.get('/doc/:id', security(), oneByDoc);
 router.post('/', insert);
-router.put('/:id', update);
-router.delete('/:id', remove);
+router.put('/:id', security(), update);
+router.delete('/:id', security(), remove);
 
 
 async function all (req, res, next) {
@@ -25,6 +26,15 @@ async function all (req, res, next) {
 async function one(req, res, next) {
     try {
         const user = await controller.one(req.params.id);
+        response.success(req, res, user, 200);
+    } catch (error) {
+        next(error);
+    }
+};
+
+async function oneByDoc(req, res, next) {
+    try {
+        const user = await controller.oneByDoc(req.params.id);
         response.success(req, res, user, 200);
     } catch (error) {
         next(error);

@@ -3,6 +3,7 @@ const uuid = require('uuid');
 
 const table = 'VENDEDOR';
 const idField = 'ID_Vendedor';
+const docField = 'Documento_vendedor';
 const auth = require('../auth/controller');
 const Direccion = require('../direcciones/controller');
 
@@ -12,6 +13,10 @@ function all() {
 
 function one(id) { 
     return db.one(table, id, idField);
+}
+
+function oneByDoc(id) { 
+    return db.one(table, id, docField);
 }
 
 async function insert(data) {
@@ -35,7 +40,12 @@ async function insert(data) {
 
     const vendedor = {
         ID_Vendedor: numericID,
-        Nombre_vendedor: data.Nombre_vendedor,
+        Documento_vendedor: data.Documento_vendedor,
+        Nombre_vendedor: data.Nombres_vendedor,
+        Apellidos_vendedor: data.Apellidos_vendedor,
+        Nombre_tienda: data.Nombre_tienda,
+        Telefono_vendedor: data.Telefono_vendedor,
+        FechaNacimiento_vendedor: data.FechaNacimiento_vendedor,
         USUARIO_ID_Usuario: numericID,
         DIRECCION_ID_Direccion: numericID
     }
@@ -54,7 +64,12 @@ async function update(id, data) {
     });
 
     const vendedor = {
-        Nombre_vendedor: data.Nombre_vendedor
+        Documento_vendedor: data.Documento_vendedor,
+        Nombre_vendedor: data.Nombres_vendedor,
+        Apellidos_vendedor: data.Apellidos_vendedor,
+        Nombre_tienda: data.Nombre_tienda,
+        Telefono_vendedor: data.Telefono_vendedor,
+        FechaNacimiento_vendedor: data.FechaNacimiento_vendedor,
     };
 
     const response = await db.update(table, vendedor, id, idField);
@@ -69,6 +84,7 @@ function remove(id) {
 module.exports = {
     all,
     one,
+    oneByDoc,
     insert,
     update,
     remove
