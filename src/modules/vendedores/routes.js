@@ -36,7 +36,7 @@ async function one(req, res, next) {
 async function insert(req, res, next) {
     try {
         const user = await controller.insert(req.body);
-        response.success(req, res, "Item creado satisfactoriamente", 201);
+        response.success(req, res, "Te has registrado como vendedor satisfactoriamente", 201);
     } catch (error) {
         next(error);
     }
