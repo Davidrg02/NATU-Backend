@@ -23,7 +23,7 @@ async function insert(data) {
         ID_Usuario: numericID,
         Correo_usuario: data.Correo_usuario,
         Contraseña_encriptada: data.Contraseña_encriptada,
-        Rol_USUARIO_ID_Rol: 3
+        Rol_USUARIO_ID_Rol: 2
     });
 
     await Direccion.insert({
