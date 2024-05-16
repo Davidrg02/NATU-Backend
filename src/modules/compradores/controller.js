@@ -56,8 +56,22 @@ async function insert(data) {
     return response;
 }
 
-function update(id, data) {
-    return db.update(table, data, id, idField);
+async function update(id, data) {
+    await Direccion.update(id,{
+        Direccion: data.Direccion,
+        Descripcion_adicional: data.Descripcion_adicional,
+        MUNICIPIO_ID_Municipio: data.MUNICIPIO_ID_Municipio
+    });
+
+    const comprador = {
+        Documento_comprador: data.Documento_comprador,
+        Nombres_comprador: data.Nombres_comprador,
+        Apellidos_comprador: data.Apellidos_comprador,
+        Telefono_comprador: data.Telefono_comprador,
+        Fecha_nacimiento_comprador: data.Fecha_nacimiento_comprador,
+    };
+
+    const response = await db.update(table, comprador, id, idField);
 }
 
 function remove(id) {
