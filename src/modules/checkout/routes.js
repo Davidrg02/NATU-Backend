@@ -1,11 +1,52 @@
-import {Router} from 'express';
+const express = require('express');
 
-const router = Router();
+const controller = require('./controller');
+const router = express.Router();
 
-router.get('/create-order', (req, res) => res.send('Creating order'));
+router.get('/create-order', createOrder);
+router.get('/success', success);
+router.get('/failure', failure);
+router.get('/pending', pending);
+router.post('/webhook', webhook);
 
-router.get('/success', (req, res) => res.send('Success'));
+async function createOrder(req, res, next) {
+    try {
+        await controller.createOrder(req, res);
+    } catch (error) {
+        next(error);
+    }
+}
 
-router.get('/cancel', (req, res) => res.send('webhook'));
+function success(req, res, next) {
+    try {
+        controller.success(req, res);
+    } catch (error) {
+        next(error);
+    }
+}
 
-export default router;
+function failure(req, res, next) {
+    try {
+        controller.failure(req, res);
+    } catch (error) {
+        next(error);
+    }
+}
+
+function pending(req, res, next) {
+    try {
+        controller.pending(req, res);
+    } catch (error) {
+        next(error);
+    }
+}
+
+function webhook(req, res, next) {
+    try {
+        controller.webhook(req, res);
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports = router;

@@ -12,6 +12,7 @@ const departamentos = require('./modules/departamentos/routes');
 const municipios = require('./modules/municipios/routes');
 const direcciones = require('./modules/direcciones/routes');
 const categorias = require('./modules/categorias/routes');
+const checkout = require('./modules/checkout/routes');
 const errors = require('./network/errors');
 
 const app = express();
@@ -37,6 +38,7 @@ app.use('/api/municipios', municipios);
 app.use('/api/direcciones', direcciones);
 app.use('/api/categorias', categorias);
 app.use('/api/auth', auth);
+app.use('/api/checkout', checkout);
 
 app.use(errors);
 
