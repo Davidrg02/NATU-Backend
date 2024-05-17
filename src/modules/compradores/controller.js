@@ -6,6 +6,7 @@ const idField = 'ID_Comprador';
 const docField = 'Documento_comprador';
 const auth = require('../auth/controller');
 const Direccion = require('../direcciones/controller');
+const Carrito = require('../carrito/controller');
 
 
 function all() {
@@ -52,6 +53,12 @@ async function insert(data) {
     }
 
     const response = await db.insert(table, comprador);
+
+    await Carrito.insert({
+        ID_Carrito: numericID,
+        COMPRADOR_ID_Comprador: numericID
+    });
+
 
     return response;
 }

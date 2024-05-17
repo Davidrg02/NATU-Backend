@@ -37,6 +37,7 @@ async function insert(data) {
         Descripcion_adicional: data.Descripcion_adicional,
         MUNICIPIO_ID_Municipio: data.MUNICIPIO_ID_Municipio
     });
+    
 
     const vendedor = {
         ID_Vendedor: numericID,
