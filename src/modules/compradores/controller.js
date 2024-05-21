@@ -14,7 +14,12 @@ function all() {
 }
 
 function one(id) { 
-    return db.one(table, id, idField);
+    //traer los datos del comprador junto con la direccion con su municipio y departamento
+    return db.customQuery (`
+    SELECT c.*, d.Direccion, d.Descripcion_adicional, m.Nombre_municipio FROM ${table} c
+    JOIN DIRECCION d ON c.DIRECCION_ID_Direccion = d.ID_Direccion
+    JOIN MUNICIPIO m ON d.MUNICIPIO_ID_Municipio = m.ID_Municipio
+    WHERE c.${idField} = ${id}`);
 }
 
 function oneByDoc(id) { 

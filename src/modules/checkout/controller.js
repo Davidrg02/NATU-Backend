@@ -1,24 +1,26 @@
 const mercadopago = require('mercadopago');
 
-const client = new mercadopago.MercadoPagoConfig({ accessToken: 'TEST-5346383899377191-051703-d3724366f08887ec60711ee25e6d8bd8-1816219046' });
+const config = require('../../config');
+
+const client = new mercadopago.MercadoPagoConfig({ accessToken: config.mercadopago.accessToken});
 
 const createOrder = async(req, res) => {
 
     const preference = new mercadopago.Preference(client);
-
+    console.log(req.body);
     preference.create({
         body: {
             items: [
                 {
-                    title: 'Test',
-                    unit_price: 10000,
-                    quantity: 1,
+                    title: req.body.title,
+                    unit_price: req.body.unit_price,
+                    quantity: req.body.quantity,
                 }
             ],
             back_urls: {
-                success: 'http://localhost:4000/api/checkout/success',
-                failure: 'http://localhost:4000/api/checkout/failure',
-                pending: 'http://localhost:4000/api/checkout/pending',
+                success: config.mercadopago.success,
+                failure: config.mercadopago.failure,
+                pending: config.mercadopago.pending,
             },
             auto_return: 'approved'
         }

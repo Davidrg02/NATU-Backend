@@ -1,9 +1,10 @@
 const express = require('express');
 
+const response = require('../../network/response');
 const controller = require('./controller');
 const router = express.Router();
 
-router.get('/create-order', createOrder);
+router.post('/create-order', createOrder);
 router.get('/success', success);
 router.get('/failure', failure);
 router.get('/pending', pending);
@@ -11,7 +12,7 @@ router.post('/webhook', webhook);
 
 async function createOrder(req, res, next) {
     try {
-        await controller.createOrder(req, res);
+        controller.createOrder(req, res);
     } catch (error) {
         next(error);
     }

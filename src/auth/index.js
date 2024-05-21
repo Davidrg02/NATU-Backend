@@ -4,7 +4,8 @@ const error = require('../middleware/errors');
 const secret = config.jwt.secret;
 
 function generateToken(data) {
-    return jwt.sign(data, secret, { expiresIn: '1h' });
+    // token expira en 1 mes
+    return jwt.sign(data, secret, { expiresIn: '30d' });
 }
 
 function verifyToken(token) {
