@@ -84,6 +84,8 @@ async function update(id, data) {
     };
 
     const response = await db.update(table, comprador, id, idField);
+
+    return response;
 }
 
 function remove(id) {
