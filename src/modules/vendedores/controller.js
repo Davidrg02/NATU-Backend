@@ -72,7 +72,7 @@ async function update(id, data) {
 
     const vendedor = {
         Documento_vendedor: data.Documento_vendedor,
-        Nombre_vendedor: data.Nombres_vendedor,
+        Nombre_vendedor: data.Nombre_vendedor,
         Apellidos_vendedor: data.Apellidos_vendedor,
         Nombre_tienda: data.Nombre_tienda,
         Telefono_vendedor: data.Telefono_vendedor,
@@ -80,6 +80,8 @@ async function update(id, data) {
     };
 
     const response = await db.update(table, vendedor, id, idField);
+
+    return response;
 }
 
 

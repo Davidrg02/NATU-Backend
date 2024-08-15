@@ -16,9 +16,10 @@ function all() {
 function one(id) { 
     //traer los datos del comprador junto con la direccion con su municipio y departamento
     return db.customQuery (`
-    SELECT c.*, d.Direccion, d.Descripcion_adicional, m.Nombre_municipio FROM ${table} c
+    SELECT c.*, d.*, m.*, u.* FROM ${table} c
     JOIN DIRECCION d ON c.DIRECCION_ID_Direccion = d.ID_Direccion
     JOIN MUNICIPIO m ON d.MUNICIPIO_ID_Municipio = m.ID_Municipio
+    JOIN USUARIO u ON c.USUARIO_ID_Usuario = u.ID_Usuario
     WHERE c.${idField} = ${id}`);
 }
 
