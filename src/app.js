@@ -14,6 +14,7 @@ const direcciones = require('./modules/direcciones/routes');
 const categorias = require('./modules/categorias/routes');
 const checkout = require('./modules/checkout/routes');
 const carrito = require('./modules/carrito/routes');
+const ordenes = require('./modules/ordenes/routes');
 const errors = require('./network/errors');
 
 const app = express();
@@ -41,6 +42,7 @@ app.use('/api/categorias', categorias);
 app.use('/api/auth', auth);
 app.use('/api/checkout', checkout);
 app.use('/api/carrito', carrito);
+app.use('/api/ordenes', ordenes);
 
 app.use(errors);
 
