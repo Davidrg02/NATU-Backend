@@ -29,6 +29,10 @@ function filter(idCategoria) {
     return db.filter(table, idCategoria, FilteredField);
 }
 
+function sugestedProducts(idCategoria, id) {
+    return db.filter(table, idCategoria, FilteredField, id, idField);
+}
+
 function hide(id) {
     return db.hide(table, id, idField);
 }
@@ -48,6 +52,7 @@ module.exports = {
     update,
     remove,
     filter,
+    sugestedProducts,
     hide,
     getProductsBySeller,
     search

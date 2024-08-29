@@ -99,6 +99,14 @@ function filter(table, filterValue , FilteredField) {
     });
 }
 
+function filterMinusOne(table, filterValue , FilteredField, id, idField) {
+    return new Promise((resolve, reject) => {
+        const query = 'SELECT * FROM ?? WHERE ?? = ? AND ?? != ?';
+        connection.query(query, [table, FilteredField, filterValue, id, idField], (error, data) => {
+            return error ? reject(error) : resolve(data);
+        });
+    });
+}
 
 function customQuery(query){
     return new Promise((resolve, reject) => {
@@ -138,6 +146,7 @@ module.exports = {
     remove,
     query,
     filter,
+    filterMinusOne,
     customQuery,
     hide,
     search
