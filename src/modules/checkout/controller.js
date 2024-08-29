@@ -1,5 +1,7 @@
 const mercadopago = require('mercadopago');
 
+const db = require('../../db/mysql');
+
 const config = require('../../config');
 
 const client = new mercadopago.MercadoPagoConfig({ accessToken: config.mercadopago.accessToken});
@@ -25,7 +27,33 @@ const createOrder = async(req, res) => {
             auto_return: 'approved'
         }
     })
-    .then(response => {
+    .then(async response => {
+        console.log(response);
+        
+        const dataOrden = {
+            ID_Orden: response.collector_id,
+            COMPRADOR_ID_Comprador: req.body.idComprador,
+            FechaHora_orden: new Date()
+        };
+        
+        const dataDetalleOrden = {
+            ID_Detalle_Orden : response.collector_id,
+            FechaHora_orden : new Date(),
+            Cantidad : req.body.quantity,
+            Subtotal : req.body.subtotal,
+            Producto_ID_Producto : req.body.idProducto,
+            Orden_ID_Orden : response.collector_id,
+            ESTADO_ID_Estado : 1
+        };
+    
+        try {
+            await db.insert('ORDEN', dataOrden);
+            await db.insert('DETALLE_ORDEN', dataDetalleOrden);
+        }
+        catch(error) {
+            res.send(error);
+        }
+        
         res.send(response);
     })
     .catch(error => {
